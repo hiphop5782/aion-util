@@ -7,6 +7,7 @@
   <description>aion macro</description>
   
   <dependencies>
+  
   	<dependency>
 	    <groupId>com.fasterxml.jackson.core</groupId>
 	    <artifactId>jackson-databind</artifactId>
@@ -19,6 +20,13 @@
 	    <version>1.18.20</version>
 	    <scope>provided</scope>
 	</dependency>
+	
+	<dependency>
+	  <groupId>lc.kra.system</groupId>
+	  <artifactId>system-hook</artifactId>
+	  <version>3.8</version>
+	</dependency>
+	
   </dependencies>
   
   <build>

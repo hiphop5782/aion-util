@@ -32,7 +32,7 @@ public class KeyJson {
 				case "alt": 
 					k.setAlt(true); break;
 				default:
-					if(token.length() != 1) throw new KeyException();
+					if(token.length() != 1) throw new KeyException(token);
 					char ch = token.charAt(0);
 					k.setKeyCode(KeyEvent.getExtendedKeyCodeForChar(ch));
 				}
