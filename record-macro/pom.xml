@@ -1,51 +1,102 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>record-macro</groupId>
-  <artifactId>record-macro</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>macro</name>
-  <description>aion macro</description>
-  
-  <dependencies>
-  
-  	<dependency>
-	    <groupId>com.fasterxml.jackson.core</groupId>
-	    <artifactId>jackson-databind</artifactId>
-	    <version>2.12.3</version>
-	</dependency>
-	  	
-  	<dependency>
-	    <groupId>org.projectlombok</groupId>
-	    <artifactId>lombok</artifactId>
-	    <version>1.18.20</version>
-	    <scope>provided</scope>
-	</dependency>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>record-macro</groupId>
+	<artifactId>record-macro</artifactId>
+	<version>0.0.1</version>
+	<name>macro</name>
+	<description>aion macro</description>
 	
-	<dependency>
-	  <groupId>lc.kra.system</groupId>
-	  <artifactId>system-hook</artifactId>
-	  <version>3.8</version>
-	</dependency>
-	
-	<dependency>
-	    <groupId>com.jtattoo</groupId>
-	    <artifactId>JTattoo</artifactId>
-	    <version>1.6.13</version>
-	</dependency>
-	
-  </dependencies>
-  
-  <build>
-    <sourceDirectory>src/main</sourceDirectory>
-    <plugins>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.1</version>
-        <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+	<properties>
+		<project.name>aion-macro</project.name>
+		<project.artifactId>aion-macro</project.artifactId>
+		<project.version>0.0.1</project.version>
+	</properties>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.12.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.20</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>lc.kra.system</groupId>
+			<artifactId>system-hook</artifactId>
+			<version>3.8</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.jtattoo</groupId>
+			<artifactId>JTattoo</artifactId>
+			<version>1.6.13</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<sourceDirectory>src/main</sourceDirectory>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.akathist.maven.plugins.launch4j</groupId>
+				<artifactId>launch4j-maven-plugin</artifactId>
+				<version>1.5.2</version>
+				<executions>
+					<execution>
+						<id>l4j-gui</id>
+						<phase>package</phase>
+						<goals>
+							<goal>launch4j</goal>
+						</goals>
+						<configuration>
+							<headerType>gui</headerType>
+							<outfile>target/aion-macro.exe</outfile>
+							<jar>target/${project.artifactId}-${project.version}.jar</jar>
+							<!-- if <dontWrapJar>true</dontWrapJar> change to this conf <jar>${project.artifactId}-${project.version}.jar</jar> -->
+							<dontWrapJar>true</dontWrapJar>
+							<errTitle>Error in launch4j plugin</errTitle>
+							<classPath>
+								<mainClass>com.hacademy.macro.ApplicationMain</mainClass>
+							</classPath>
+<!-- 							<icon>Project.ico</icon> -->
+							<jre>
+								<minVersion>1.8.0</minVersion>
+								<initialHeapSize>512</initialHeapSize>
+								<maxHeapSize>1024</maxHeapSize>
+							</jre>
+							<versionInfo>
+								<fileVersion>1.0.0.0</fileVersion>
+								<txtFileVersion>1.0.0.0</txtFileVersion>
+								<fileDescription>des</fileDescription>
+								<copyright>Copyright (c) 2021</copyright>
+								<companyName>H'academy</companyName>
+								<productVersion>3.0.0.0</productVersion>
+								<txtProductVersion>${project.version}</txtProductVersion>
+								<productName>${project.name}</productName>
+								<internalName>${project.name}</internalName>
+								<originalFilename>aion-macro.exe</originalFilename>
+							</versionInfo>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>
