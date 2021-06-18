@@ -27,6 +27,12 @@ public class Keybot {
 		}
 	}
 	
+	public static void action(KeyJson[] macro) {
+		for(KeyJson json : macro) {
+			json.getKey().action();
+		}
+	}
+	
 	public static void action(List<Key> macro) {
 		for(Key key : macro) {
 			key.action();
