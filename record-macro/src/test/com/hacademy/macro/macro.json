@@ -4,6 +4,7 @@
 	{"key":"shift+a"},
 	{"key":"shift+n"},
 	{"key":"shift+k"},
+	{"delay":5},
 	{"key":"shift+y"},
 	{"key":"shift+o"},
 	{"key":"shift+u"}

@@ -2,6 +2,9 @@ package com.hacademy.macro;
 
 import java.awt.event.KeyEvent;
 
+import com.hacademy.macro.key.Key;
+import com.hacademy.macro.key.Keybot;
+
 public class Test03 {
 	public static void main(String[] args) {
 		Key[] macro = {

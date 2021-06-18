@@ -1,8 +1,10 @@
-package com.hacademy.macro;
+package com.hacademy.macro.key;
 
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.util.List;
+
+import com.hacademy.macro.RobotManager;
 
 public class Keybot {
 
