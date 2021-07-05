@@ -14,6 +14,7 @@ public class KeyHookProc {
 		if(provider != null) return;
 		provider = Provider.getCurrentProvider(false);
 		provider.register(KeyStroke.getKeyStroke(KeyEvent.VK_F6, 0), e->{
+			System.out.println("event fire");
 			ui.fireEvent();
 		});
 	}
