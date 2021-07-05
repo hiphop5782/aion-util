@@ -1,29 +1,25 @@
 package com.hacademy.macro.key;
 
-import com.hacademy.macro.ui.ApplicationUI;
+import java.awt.event.KeyEvent;
 
-import lc.kra.system.keyboard.GlobalKeyboardHook;
-import lc.kra.system.keyboard.event.GlobalKeyAdapter;
-import lc.kra.system.keyboard.event.GlobalKeyEvent;
+import javax.swing.KeyStroke;
+
+import com.hacademy.macro.ui.ApplicationUI;
+import com.tulskiy.keymaster.common.Provider;
 
 public class KeyHookProc {
-	private static GlobalKeyboardHook hook;
+	
+	private static Provider provider;
 	public static void start(ApplicationUI ui) {
-		if(hook != null) return;
-		hook = new GlobalKeyboardHook(true);
-		hook.addKeyListener(new GlobalKeyAdapter() {
-			@Override
-			public void keyReleased(GlobalKeyEvent event) {
-				switch(event.getVirtualKeyCode()) {
-				case GlobalKeyEvent.VK_F6:
-					ui.fireEvent();
-				}
-			}
+		if(provider != null) return;
+		provider = Provider.getCurrentProvider(false);
+		provider.register(KeyStroke.getKeyStroke(KeyEvent.VK_F6, 0), e->{
+			ui.fireEvent();
 		});
 	}
 	public static void stop() {
-		if(hook == null) return;
-		hook.shutdownHook();
-		hook = null;
+		if(provider == null) return;
+		provider.close();
+		provider = null;
 	}
 }

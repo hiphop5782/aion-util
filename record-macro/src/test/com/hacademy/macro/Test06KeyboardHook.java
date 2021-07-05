@@ -1,20 +1,17 @@
 package com.hacademy.macro;
 
-import lc.kra.system.keyboard.GlobalKeyboardHook;
-import lc.kra.system.keyboard.event.GlobalKeyAdapter;
-import lc.kra.system.keyboard.event.GlobalKeyEvent;
+import java.awt.event.KeyEvent;
+
+import javax.swing.KeyStroke;
+
+import com.tulskiy.keymaster.common.Provider;
 
 public class Test06KeyboardHook {
 	public static void main(String[] args) {
-		GlobalKeyboardHook hook = new GlobalKeyboardHook(true);
-		hook.addKeyListener(new GlobalKeyAdapter() {
-			@Override
-			public void keyReleased(GlobalKeyEvent event) {
-				System.out.println(event.getVirtualKeyCode());
-				switch(event.getVirtualKeyCode()) {
-				case GlobalKeyEvent.VK_ESCAPE: hook.shutdownHook();
-				}
-			}
+		Provider provider = Provider.getCurrentProvider(false);
+		provider.register(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), e->{
+			System.out.println("close operation");
+			provider.close();
 		});
 	}
 }
