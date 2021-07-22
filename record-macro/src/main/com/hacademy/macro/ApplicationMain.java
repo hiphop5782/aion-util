@@ -2,15 +2,23 @@ package com.hacademy.macro;
 
 import javax.swing.UIManager;
 
-import com.hacademy.macro.ui.ApplicationUI;
+import com.hacademy.macro.key.KeyHookProc;
+import com.hacademy.macro.ui.TrayUI;
 import com.jtattoo.plaf.mcwin.McWinLookAndFeel;
 
 public class ApplicationMain {
 	public static void main(String[] args) {
 		try {
+			Class.forName("com.hacademy.macro.key.KeyHookProc");
 			UIManager.setLookAndFeel(new McWinLookAndFeel());
+//			ApplicationUI ui = new ApplicationUI();
+			TrayUI ui = new TrayUI();
+			ui.start();
 		}
-		catch(Exception e) {}
-		ApplicationUI ui = new ApplicationUI();
+		catch(Exception e) {
+			e.printStackTrace();
+			KeyHookProc.terminate();
+			System.exit(-1);
+		}
 	}
 }
