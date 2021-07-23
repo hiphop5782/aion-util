@@ -9,11 +9,12 @@
 	<description>aion macro</description>
 	
 	<properties>
+		<java.version>1.8</java.version>
 		<project.name>aion-macro</project.name>
 		<project.artifactId>aion-macro</project.artifactId>
 		<project.version>0.0.1</project.version>
 	</properties>
-
+	
 	<dependencies>
 
 		<dependency>
@@ -40,18 +41,37 @@
 			<artifactId>JTattoo</artifactId>
 			<version>1.6.13</version>
 		</dependency>
-
+		
 	</dependencies>
 
 	<build>
-		<sourceDirectory>src/main</sourceDirectory>
+		<sourceDirectory>${project.basedir}/src/main</sourceDirectory>
+		<outputDirectory>${project.build.directory}/classes</outputDirectory>
+		
+		<!--
+		 	추가할 리소스에 대해서 정의 
+		 	<directory> : 리소스 폴더의 위치
+		 	<includes> : 포함시킬 파일들
+		 	<targetPath> : 포함시킬 위치
+		 -->
+		<resources>
+			<resource>
+				<directory>${project.basedir}/src/main/com/hacademy/macro/resource</directory>
+				<includes>
+					<include>icon.png</include>
+					<include>icon.ico</include>
+					<include>aion-macro.exe.manifest</include>
+				</includes>
+				<targetPath>com/hacademy/macro/resource</targetPath>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.1</version>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -59,9 +79,6 @@
 				<artifactId>maven-jar-plugin</artifactId>
 				<configuration>
 					<outputDirectory>${project.build.directory}/result</outputDirectory>
-<!-- 					<includes> -->
-<!-- 						<include>src/main/com/hacademy/macro/resource</include> -->
-<!-- 					</includes> -->
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
@@ -90,6 +107,7 @@
 			    </executions>
 			</plugin>
 			
+			<!-- 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
@@ -103,16 +121,17 @@
 						</goals>
 						<configuration>
 							<includeEmptyDirs>true</includeEmptyDirs>
-							<outputDirectory>${project.build.directory}/classes/com/hacademy/macro/resource</outputDirectory>
+							<outputDirectory>${project.build.directory}/jre</outputDirectory>
 							<resources>
 								<resource>
-									<directory>src/main/com/hacademy/macro/resource</directory>
+									<directory>${java.home}</directory>
 								</resource>
 							</resources>
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
+			 -->
 			
 			<plugin>
 				<groupId>com.akathist.maven.plugins.launch4j</groupId>
@@ -127,7 +146,10 @@
 						</goals>
 						<configuration>
 							<headerType>gui</headerType>
-							<outfile>target/result/aion-macro.exe</outfile>
+							<outfile>target/result/${project.artifactId}.exe</outfile>
+							
+							<!-- 실행 시 관리자 권한을 부여하기 위한 manifest 파일 추가 설정 -->
+							<manifest>src/main/com/hacademy/macro/resource/aion-macro.exe.manifest</manifest>
 							<singleInstance>
 								<mutexName>aion-macro</mutexName>
 								<windowTitle>aion-macro</windowTitle>
@@ -140,6 +162,7 @@
 							</classPath>
 							<icon>hacademy.ico</icon>
 							<jre>
+								<path>jre</path>
 								<minVersion>1.8.0</minVersion>
 								<initialHeapSize>512</initialHeapSize>
 								<maxHeapSize>1024</maxHeapSize>

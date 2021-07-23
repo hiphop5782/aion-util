@@ -58,8 +58,8 @@ public class KeyHookProc {
 			}
 		}
 		else {
-			JOptionPane.showMessageDialog(null, "매크로 파일을 선택하세요");
-			loadMacroFile();
+			JOptionPane.showMessageDialog(null, "매크로 파일을 선택해야 실행할 수 있습니다");
+			System.exit(-1);
 		}
 	}
 	public static void terminate() {
