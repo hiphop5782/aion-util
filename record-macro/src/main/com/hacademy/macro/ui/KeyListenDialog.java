@@ -1,14 +1,22 @@
 package com.hacademy.macro.ui;
 
+import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.KeyStroke;
 
+import com.hacademy.macro.key.KeyProperties;
+
 public class KeyListenDialog extends JDialog{
+	private static final long serialVersionUID = 1L;
 	private KeyStroke key;
+	
+	private JLabel label = new JLabel("", JLabel.CENTER);
 	private KeyListenDialog() {
+		key = KeyProperties.load();
 		setTitle("Change Macro Key");
 		setModal(true);
 		setResizable(false);
@@ -18,10 +26,13 @@ public class KeyListenDialog extends JDialog{
 			@Override
 			public void keyPressed(KeyEvent e) {
 				key = KeyStroke.getKeyStroke(e.getKeyCode(), e.getModifiersEx());
-				System.out.println(key);
+				label.setText(key.toString());
 			}
 		});
-		setSize(300, 300);
+		setSize(450, 150);
+		getContentPane().add(label);
+		label.setFont(new Font("", Font.BOLD, 35));
+		label.setText(key.toString());
 	}
 	
 	private static KeyListenDialog dialog = new KeyListenDialog();

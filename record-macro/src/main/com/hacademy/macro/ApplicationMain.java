@@ -9,8 +9,8 @@ import com.jtattoo.plaf.mcwin.McWinLookAndFeel;
 public class ApplicationMain {
 	public static void main(String[] args) {
 		try {
-			Class.forName("com.hacademy.macro.key.KeyHookProc");
 			UIManager.setLookAndFeel(new McWinLookAndFeel());
+			Class.forName("com.hacademy.macro.key.KeyHookProc");
 //			ApplicationUI ui = new ApplicationUI();
 			TrayUI ui = new TrayUI();
 			ui.start();

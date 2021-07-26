@@ -16,15 +16,31 @@ import com.tulskiy.keymaster.common.Provider;
 public class KeyHookProc {
 	
 	private static Provider provider = Provider.getCurrentProvider(false);
+	private static List<Key> macro;
+	static {
+		macro = MacroProperties.load();
+	}
+	
+	public static void refresh() {
+		stop();
+		macro = MacroProperties.reload();
+		if(macro == null) {
+			JOptionPane.showMessageDialog(null, "매크로 파일을 선택해야 실행할 수 있습니다");
+			System.exit(-1);
+		}
+		start();
+	}
+	
 	private static KeyStroke trigger = KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0);
 	
 	public static void start(ApplicationUI ui) {
+		trigger = KeyProperties.load();
 		provider.register(trigger, e->{
 			ui.fireEvent();
 		});
 	}
 	public static void start() {
-		loadMacroFile();
+		trigger = KeyProperties.load();
 		provider.register(trigger, e->{
 			if(macro == null || macro.isEmpty()) return;
 			Keybot.action(macro);
@@ -33,35 +49,7 @@ public class KeyHookProc {
 	public static void stop() {
 		provider.unregister(trigger);
 	}
-	private static List<Key> macro;
-	public static void loadMacroFile() {
-		JFileChooser chooser = new JFileChooser();
-		int choice = chooser.showOpenDialog(null);
-		if(choice == JFileChooser.APPROVE_OPTION) {
-			File json = chooser.getSelectedFile();
-			ObjectMapper mapper = new ObjectMapper();
-			try {
-				KeyJson[] jsonArray = mapper.readValue(json, KeyJson[].class);
-				if(macro == null) {
-					macro = new ArrayList<>();
-				}
-				else {
-					macro.clear();
-				}
-				
-				for(KeyJson kjs : jsonArray) {
-					macro.add(kjs.getKey());
-				}
-			}
-			catch(Exception ex) {
-				ex.printStackTrace();
-			}
-		}
-		else {
-			JOptionPane.showMessageDialog(null, "매크로 파일을 선택해야 실행할 수 있습니다");
-			System.exit(-1);
-		}
-	}
+	
 	public static void terminate() {
 		provider.close();
 	}

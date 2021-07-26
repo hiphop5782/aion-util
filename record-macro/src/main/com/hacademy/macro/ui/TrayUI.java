@@ -14,13 +14,17 @@ import javax.swing.KeyStroke;
 
 import com.hacademy.macro.ApplicationMain;
 import com.hacademy.macro.key.KeyHookProc;
+import com.hacademy.macro.key.KeyProperties;
+import com.hacademy.macro.key.MacroProperties;
 
 public class TrayUI {
 	
 	private PopupMenu popup = new PopupMenu();
 	
 	private MenuItem info = new MenuItem("Developer");
+	private MenuItem legion = new MenuItem("GENIUS Legion");
 	private MenuItem key = new MenuItem("Change key");
+	private MenuItem macro = new MenuItem("Change macro");
 	private MenuItem begin = new MenuItem("Macro start");
 	private MenuItem end = new MenuItem("Macro finish");
 	private MenuItem exit = new MenuItem("Exit");
@@ -41,8 +45,10 @@ public class TrayUI {
 	
 	private void prepareMenu() {
 		popup.add(info);
+		popup.add(legion);
 		popup.addSeparator();
 		popup.add(key);
+		popup.add(macro);
 		popup.addSeparator();
 		popup.add(begin);
 		popup.add(end);
@@ -58,9 +64,22 @@ public class TrayUI {
 			catch(Exception ex) {}
 		});
 		
+		legion.addActionListener(e->{
+			try {
+				Runtime.getRuntime().exec("cmd /c start https://aion.plaync.com/legions/server/24/id/2548/home");
+			}
+			catch(Exception ex) {}
+		});
+		
 		key.addActionListener(e->{
+			KeyHookProc.stop();
 			KeyStroke stroke = KeyListenDialog.open();
-			System.out.println(stroke);
+			KeyProperties.save(stroke);
+			KeyHookProc.start();
+		});
+		
+		macro.addActionListener(e->{
+			KeyHookProc.refresh();
 		});
 		
 		begin.addActionListener(e->{
