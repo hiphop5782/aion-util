@@ -22,7 +22,7 @@ public class MacroProperties {
 	private static final File macroFile = new File(System.getProperty("user.dir"), "macro.properties");
 	
 	public static List<Key> reload(){
-		JFileChooser chooser = new JFileChooser();
+		JFileChooser chooser = new JFileChooser(System.getProperty("user.dir"));
 		int choice = chooser.showOpenDialog(null);
 		if(choice == JFileChooser.APPROVE_OPTION) {
 			File json = chooser.getSelectedFile();
