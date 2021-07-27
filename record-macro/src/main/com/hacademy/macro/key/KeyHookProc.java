@@ -11,6 +11,7 @@ import javax.swing.KeyStroke;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hacademy.macro.ui.ApplicationUI;
+import com.hacademy.macro.util.WindowUtility;
 import com.tulskiy.keymaster.common.Provider;
 
 public class KeyHookProc {
@@ -42,6 +43,9 @@ public class KeyHookProc {
 	public static void start() {
 		trigger = KeyProperties.load();
 		provider.register(trigger, e->{
+			//아이온이 실행중일 경우가 아니면 차단
+			String title = WindowUtility.getActiveWindowTitle();
+			if(!title.startsWith("AION Client")) return;
 			if(macro == null || macro.isEmpty()) return;
 			Keybot.action(macro);
 		});
