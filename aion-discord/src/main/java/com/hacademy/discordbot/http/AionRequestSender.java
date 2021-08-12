@@ -2,15 +2,14 @@ package com.hacademy.discordbot.http;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hacademy.discordbot.entity.CharacterDetailInformation;
-import com.hacademy.discordbot.entity.CharacterEquipmentsInformation;
 import com.hacademy.discordbot.entity.CharacterInformation;
 import com.hacademy.discordbot.entity.SearchResult;
 import com.hacademy.discordbot.entity.SearchUnit;
+import com.hacademy.discordbot.parse.MessageFactory.User;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -52,6 +51,9 @@ public class AionRequestSender {
 		}
 	}
 	
+	public static SearchUnit findByServerNameAndUsername(User user) {
+		return findByServerNameAndUsername(user.getServerName(), user.getUserName());
+	}
 	public static SearchUnit findByServerNameAndUsername(String serverName, String username) {
 		SearchResult result = findByUsername(username);
 		for(SearchUnit unit : result.getDocuments()) {

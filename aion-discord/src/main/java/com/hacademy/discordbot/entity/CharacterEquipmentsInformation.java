@@ -22,4 +22,8 @@ public class CharacterEquipmentsInformation {
 	private EquipmentCategory category1;
 	private EquipmentCategory category2;
 	private EquipmentCategory category3;
+	
+	public boolean isHighEnchant() {
+		return enchantCount >= 10;
+	}
 }

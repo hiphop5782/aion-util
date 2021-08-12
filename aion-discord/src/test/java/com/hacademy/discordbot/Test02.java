@@ -22,7 +22,7 @@ public class Test02 {
 	public static void main(String[] args) {
 		Format fmt = new DecimalFormat("#,###");
 		Format fmt2 = new DecimalFormat("00");
-		String token = "ODczNjM3NjM3MTcxMzMxMTEy.YQ7UdA.VgHBkJ337OYxuFi4gqDmWLxr6b4";
+		String token = "ODczNjM3NjM3MTcxMzMxMTEy.YQ7UdA.eqhkp2Dc9USc0fklzQMyKB_X1TE";
 		GatewayDiscordClient client = DiscordClientBuilder.create(token).build().login().block(); 
 		
 		client.on(ReadyEvent.class)
