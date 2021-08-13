@@ -120,20 +120,27 @@ public class MarkdownMaker {
 	}
 	
 	private void addPhysicalInformation(CharacterDetailInformation detail) {
-		add("공격력(우/좌)", ":", 
-			String.valueOf(detail.getCharacter_stats().getTotalStat().getPhysicalRight()),
-			"/",
-			String.valueOf(detail.getCharacter_stats().getTotalStat().getPhysicalLeft()));
-		
-		add("명중(우/좌)", ":", 
-			String.valueOf(detail.getCharacter_stats().getTotalStat().getAccuracyRight()),
-			"/",
-			String.valueOf(detail.getCharacter_stats().getTotalStat().getAccuracyLeft()));
-		
-		add("치명타(우/좌)", ":", 
-			String.valueOf(detail.getCharacter_stats().getTotalStat().getCriticalRight()),
-			"/",
-			String.valueOf(detail.getCharacter_stats().getTotalStat().getCriticalLeft()));
+		if(detail.getCharacter_stats().getTotalStat().getPhysicalLeft() > 0) {
+			add("공격력(우/좌)", ":", 
+					String.valueOf(detail.getCharacter_stats().getTotalStat().getPhysicalRight()),
+					"/",
+					String.valueOf(detail.getCharacter_stats().getTotalStat().getPhysicalLeft()));
+			
+			add("명중(우/좌)", ":", 
+					String.valueOf(detail.getCharacter_stats().getTotalStat().getAccuracyRight()),
+					"/",
+					String.valueOf(detail.getCharacter_stats().getTotalStat().getAccuracyLeft()));
+			
+			add("치명타(우/좌)", ":", 
+					String.valueOf(detail.getCharacter_stats().getTotalStat().getCriticalRight()),
+					"/",
+					String.valueOf(detail.getCharacter_stats().getTotalStat().getCriticalLeft()));
+		}
+		else {
+			add("공격력", ":", String.valueOf(detail.getCharacter_stats().getTotalStat().getPhysicalRight()));
+			add("명중", ":", String.valueOf(detail.getCharacter_stats().getTotalStat().getAccuracyRight()));
+			add("치명타", ":",String.valueOf(detail.getCharacter_stats().getTotalStat().getCriticalRight()));
+		}
 	}
 	
 	private void addMagicalInformation(CharacterDetailInformation detail) {
