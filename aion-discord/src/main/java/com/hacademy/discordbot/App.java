@@ -3,7 +3,7 @@ package com.hacademy.discordbot;
 import java.io.IOException;
 
 import com.hacademy.discordbot.parse.MessageFactory;
-import com.hacademy.discordbot.util.TokenReader;
+import com.hacademy.discordbot.util.ResourceReader;
 
 import discord4j.core.DiscordClientBuilder;
 import discord4j.core.GatewayDiscordClient;
@@ -15,7 +15,7 @@ import discord4j.core.object.entity.channel.MessageChannel;
 
 public class App {
 	public static void main(String[] args) throws IOException {
-		String token = TokenReader.read();
+		String token = ResourceReader.readToken();
 		GatewayDiscordClient client = DiscordClientBuilder.create(token).build().login().block(); 
 		
 		client.on(ReadyEvent.class)

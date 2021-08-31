@@ -46,9 +46,9 @@ public class MarkdownMaker {
 		buffer.append(str);
 	}
 	
-	public void add(String ... str) {
-		for(String s : str) {
-			add(s);
+	public void add(Object ... objs) {
+		for(Object o : objs) {
+			add(o.toString());
 			addSpace();
 		}
 		nextLine();
@@ -63,7 +63,8 @@ public class MarkdownMaker {
 		buffer.append('\n');
 	}
 	
-	public String getString() {
+	@Override
+	public String toString() {
 		return buffer.toString();
 	}
 	

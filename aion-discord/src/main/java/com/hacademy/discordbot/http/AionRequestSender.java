@@ -9,7 +9,7 @@ import com.hacademy.discordbot.entity.CharacterDetailInformation;
 import com.hacademy.discordbot.entity.CharacterInformation;
 import com.hacademy.discordbot.entity.SearchResult;
 import com.hacademy.discordbot.entity.SearchUnit;
-import com.hacademy.discordbot.parse.MessageFactory.User;
+import com.hacademy.discordbot.entity.User;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
