@@ -114,6 +114,7 @@ public class EnchantAction extends DiscordAction {
 					enchantLevel = enchantLevel > 10? 10 : enchantLevel - 1;
 					maker.add("==>","강화 실패..","[","+"+enchantLevel,itemName, "]");
 				}
+				maker.add("==>","적용 확률",":",successRate,"%");
 					
 				maker.endCssBlock();
 					
